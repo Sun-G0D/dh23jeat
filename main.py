@@ -4,22 +4,10 @@ import tensorflow as tf
 import cv2
 import matplotlib.pyplot as plt
 import os
+
 from os import listdir
-
-from sklearn.metrics import accuracy_score, precision_score, recall_score
-from sklearn.model_selection import train_test_split
 from tensorflow.keras import layers, losses
-from tensorflow.keras.datasets import fashion_mnist
 from tensorflow.keras.models import Model
-
-def prepare_image(fpath):
-    with images.get_download_stream(fpath) as f:
-        data = f.read()
-    nparr = np.fromstring(data, np.uint8)
-    img_np = cv2.imdecode(nparr, cv2.IM_READCOLOR)
-    im = cv2.resize(img_np, (64, 64))
-    im = im/255
-    return im
 
 class Autoencoder(Model):
     def __init__(self):
