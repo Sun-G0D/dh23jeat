@@ -6,8 +6,6 @@ import matplotlib.pyplot as plt
 import os
 from os import listdir
 
-from sklearn.metrics import accuracy_score, precision_score, recall_score
-from sklearn.model_selection import train_test_split
 from tensorflow.keras import layers, losses
 from tensorflow.keras.datasets import fashion_mnist
 from tensorflow.keras.models import Model
@@ -26,23 +24,15 @@ class Autoencoder(Model):
         super(Autoencoder, self).__init__()
         self.encoder = tf.keras.Sequential([
             layers.Input(shape=(64, 64, 3)),
-            layers.Conv2D(496, (3, 3), activation='relu', padding='same', strides=2),
-            layers.Conv2D(248, (3, 3), activation='relu', padding='same', strides=2),
-            layers.Conv2D(124, (3, 3), activation='relu', padding='same', strides=2),
             layers.Conv2D(64, (3, 3), activation='relu', padding='same', strides=2),
             layers.Conv2D(32, (3, 3), activation='relu', padding='same', strides=2),
-            layers.Conv2D(16, (3, 3), activation='relu', padding='same', strides=2),
             layers.Conv2D(16, (3, 3), activation='relu', padding='same', strides=2)
         ])
 
         self.decoder = tf.keras.Sequential([
-            layers.Conv2DTranspose(16, kernel_size=3, strides=1, activation='relu', padding='same'),
             layers.Conv2DTranspose(16, kernel_size=3, strides=2, activation='relu', padding='same'),
             layers.Conv2DTranspose(32, kernel_size=3, strides=2, activation='relu', padding='same'),
             layers.Conv2DTranspose(64, kernel_size=3, strides=2, activation='relu', padding='same'),
-            layers.Conv2DTranspose(124, kernel_size=3, strides=2, activation='relu', padding='same'),
-            layers.Conv2DTranspose(248, kernel_size=3, strides=2, activation='relu', padding='same'),
-            layers.Conv2DTranspose(496, kernel_size=3, strides=2, activation='relu', padding='same'),
             layers.Conv2D(3, kernel_size=(3, 3), activation='sigmoid', padding='same')])
 
     def call(self, x):
@@ -63,11 +53,13 @@ if __name__ == '__main__':
         i += 1
 
     np.save('test1', a)
-    
+
     print("done")
     """
     d = np.load('test1.txt.npy')
     autoencoder.decoder.build(input_shape=(None, 1, 1, 16))
+    print(autoencoder.encoder.summary())
+    print(autoencoder.decoder.summary())
     """
     for images in os.listdir(folder_dir):
         # check if the image ends with png
@@ -77,4 +69,5 @@ if __name__ == '__main__':
             cv2.imwrite("C:/test/" + images, im)
     """
 
-    autoencoder.fit(d, d, epochs=400, batch_size=100, validation_split=.15, shuffle=True)
+    autoencoder.fit(d, d, epochs=10, batch_size=10, validation_split=.15, shuffle=True)
+    autoencoder.encoder.save_weights('top_weights.h5')
