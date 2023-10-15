@@ -1,64 +1,55 @@
 import numpy as np
-import pandas as pd
-import tensorflow as tf
+import torch
+import torch.nn as nn
+import torch.optim as optim
 import cv2
-import matplotlib.pyplot as plt
 import os
 
 from os import listdir
+from torch.utils.data import TensorDataset, DataLoader
 
-from tensorflow.keras import layers, losses
-from tensorflow.keras.models import Model
-
-class Autoencoder(Model):
+class AE(nn.Module):
     def __init__(self):
-        super(Autoencoder, self).__init__()
-        self.encoder = tf.keras.Sequential([
-            layers.Input(shape=(64, 64, 3)),
-            layers.Conv2D(64, (3, 3), activation='relu', padding='same', strides=2),
-            layers.Conv2D(32, (3, 3), activation='relu', padding='same', strides=2),
-            layers.Conv2D(16, (3, 3), activation='relu', padding='same', strides=2)
-        ])
+        super(AE, self).__init__()
+        self.encoder = nn.Sequential(
+            nn.Conv2d(1, 8, kernel_size=3, stride=4),
+            nn.ReLU(),
+            nn.Conv2d(8, 16, kernel_size=3, stride=4),
+            nn.ReLU(),
+            nn.Conv2d(16, 32, kernel_size=3, stride=4),
+            nn.ReLU()
+        )
+        self.decoder = nn.Sequential(
+            nn.ConvTranspose2d(32, 16, kernel_size=3, stride=4),
+            nn.ReLU(),
+            nn.ConvTranspose2d(16, 8, kernel_size=3, stride=4),
+            nn.ReLU(),
+            nn.ConvTranspose2d(8, 1, kernel_size=3, stride=4),
+            nn.Sigmoid()
+        )
 
-        self.decoder = tf.keras.Sequential([
-            layers.Conv2DTranspose(16, kernel_size=3, strides=2, activation='relu', padding='same'),
-            layers.Conv2DTranspose(32, kernel_size=3, strides=2, activation='relu', padding='same'),
-            layers.Conv2DTranspose(64, kernel_size=3, strides=2, activation='relu', padding='same'),
-            layers.Conv2D(3, kernel_size=(3, 3), activation='sigmoid', padding='same')])
-
-    def call(self, x):
-        encoded = self.encoder(x)
-        decoded = self.decoder(encoded)
-        return decoded
+    def forward(self, x):
+        x = self.encoder(x)
+        x = self.decoder(x)
+        return x
 
 if __name__ == '__main__':
-    autoencoder = Autoencoder()
-    autoencoder.compile(optimizer='adam', loss=losses.MeanSquaredError())
-    folder_dir = "C:/Users/jeffr_qv7a35e/Downloads/Re-PolyVore/Re-PolyVore/top"
-    a = np.empty(shape = (19397, 64, 64, 3))
-    """
-    i = 0
-    for images in os.listdir("C:/test"):
-        img = cv2.imread("C:/test/" + images)
-        a[i] = img/255
-        i += 1
+    AE = AE()
+    data = np.load('test1.txt.npy')
+    tensor = torch.Tensor(data)
+    dataset = TensorDataset(tensor, tensor)
+    dataloader = DataLoader(dataset)
 
-    np.save('test1', a)
+    criterion = nn.MSELoss()
+    optimizer = optim.Adam(AE.parameters(), lr=0.001)
 
-    print("done")
-    """
-    d = np.load('test1.txt.npy')
-    autoencoder.decoder.build(input_shape=(None, 1, 1, 16))
-    print(autoencoder.encoder.summary())
-    print(autoencoder.decoder.summary())
-    """
-    for images in os.listdir(folder_dir):
-        # check if the image ends with png
-        if (images.endswith(".jpg")):
-            img = cv2.imread(folder_dir + "/" + images)
-            im = cv2.resize(img, (64, 64))
-            cv2.imwrite("C:/test/" + images, im)
-    """
-
-    autoencoder.fit(d, d, epochs=10, batch_size=10, validation_split=.15, shuffle=True)
-    autoencoder.encoder.save_weights('top_weights.h5')
+    num_epochs = 50
+    for epoch in range(num_epochs):
+        for d in dataloader:
+            y = AE(d)
+            loss = criterion(y, d)
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
+            if epoch % 5== 0:
+                print('Epoch [{}/{}], Loss: {:.4f}'.format(epoch+1, num_epochs, loss.item()))
