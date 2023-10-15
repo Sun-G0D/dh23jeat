@@ -1,61 +1,120 @@
+<!DOCTYPE html>
 <html>
-  <head>
-    <link rel = "stylesheet" href= "style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="script.js"></script>
-  </head>
 
-  <body>
-    <div class="input-sidebar">
-      <div class="searchbar">
-        <form class="example" action="/action_page.php">
-          <input type="text" placeholder="Search" name="search">
-          <button type="submit"><i class="fa fa-search"></i></button>
-        </form>
-      </div>
-      <ul id="myMenu">
-        <li><a onclick="expandOptions()">Tops</a></li>
-          <div class="flex-hidden" id="tops-menu">
-            <a class="input-option">
-              <img src="https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/455359/sub/goods_455359_sub14.jpg?width=700" alt="generic blank t-shirt from uniqlo"></img>
-            </a>
-            <a class="outfit-wrapper">Top 2
-            </a>
-            <a class="outfit-wrapper">Top 3
-            </a>
-          </div>
-          <li><a href="#">Bottoms</a></li>
-          <div class="flex-hidden">
-          </div>
-          <li><a href="#">Outerwear</a></li>
-          <div class="flex-hidden">
-          </div>
-          <li><a href="#">Shoes</a></li>
-          <div class="flex-hidden">
-          </div>
-      </ul>
+<head>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="script.js"></script>
+</head>
 
-      <div class="upload-button-wrapper">
-        <a href="something" class="upload-button"> Upload </a>
-      </div>
+<body>
+  <div class="input-sidebar">
+    <div class="searchbar">
+      <form class="example" action="/action_page.php">
+        <input type="text" placeholder="Search" name="search">
+        <button type="submit"><i class="fa fa-search"></i></button>
+      </form>
     </div>
+    <ul id="myMenu">
+      <li><a onclick="expandOptions('tops-menu'); closeOptions('bottoms-menu'); closeOptions('outerwears-menu'); closeOptions('shoes-menu')">Tops</a>
+        <div class="flex-hidden" id="tops-menu">
+          <a class="input-option">Top 1
+            <img src="https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/455359/sub/goods_455359_sub14.jpg?width=200"
+              alt="generic blank t-shirt from uniqlo">
+          </a>
+          <a class="input-option">Top 2
+            <img src="https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/455359/sub/goods_455359_sub14.jpg?width=200"
+              alt="generic blank t-shirt from uniqlo">
+          </a>
+          <a class="input-option">Top 3
+            <img src="https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/455359/sub/goods_455359_sub14.jpg?width=200"
+              alt="generic blank t-shirt from uniqlo">
+          </a>
+        </div>
+      </li>
+      <li><a onclick="expandOptions('bottoms-menu'); closeOptions('tops-menu'); closeOptions('outerwears-menu'); closeOptions('shoes-menu')">Bottoms</a>
+        <div class="flex-hidden" id="bottoms-menu">
+          <a class="input-option">Bottom 1
+            <img src="https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/455359/sub/goods_455359_sub14.jpg?width=200"
+              alt="generic blank t-shirt from uniqlo">
+          </a>
+          <a class="input-option">Bottom 2
+            <img src="https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/455359/sub/goods_455359_sub14.jpg?width=200"
+              alt="generic blank t-shirt from uniqlo">
+          </a>
+          <a class="input-option">Bottom 3
+            <img src="https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/455359/sub/goods_455359_sub14.jpg?width=200"
+              alt="generic blank t-shirt from uniqlo">
+          </a>
+        </div>
+      </li>
+      <li><a onclick="expandOptions('outerwears-menu'); closeOptions('tops-menu'); closeOptions('bottoms-menu'); closeOptions('shoes-menu')">Outerwear</a>
+        <div class="flex-hidden" id="outerwears-menu">
+          <a class="input-option">Outerwear 1
+            <img src="https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/455359/sub/goods_455359_sub14.jpg?width=200"
+              alt="generic blank t-shirt from uniqlo">
+          </a>
+          <a class="input-option">Outerwear 2
+            <img src="https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/455359/sub/goods_455359_sub14.jpg?width=200"
+              alt="generic blank t-shirt from uniqlo">
+          </a>
+          <a class="input-option">Outerwear 3
+            <img src="https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/455359/sub/goods_455359_sub14.jpg?width=200"
+              alt="generic blank t-shirt from uniqlo">
+          </a>
+        </div>
+      </li>
+      <li><a onclick="expandOptions('shoes-menu'); closeOptions('tops-menu'); closeOptions('bottoms-menu'); closeOptions('outerwears-menu')">Shoes</a>
+        <div class="flex-hidden" id="shoes-menu">
+          <a class="input-option">Shoes 1
+            <img src="https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/455359/sub/goods_455359_sub14.jpg?width=200"
+              alt="generic blank t-shirt from uniqlo">
+          </a>
+          <a class="input-option">Shoes 2
+            <img src="https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/455359/sub/goods_455359_sub14.jpg?width=200"
+              alt="generic blank t-shirt from uniqlo">
+          </a>
+          <a class="input-option">Shoes 3
+            <img src="https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/455359/sub/goods_455359_sub14.jpg?width=200"
+              alt="generic blank t-shirt from uniqlo">
+          </a>
+        </div>
+      </li>
+    </ul>
 
-    <div class="output-container">
-      <div class="output-flex">
-        <a class="outfit-wrapper">Outfit 1
-          <img src="https://api.fastretailing.com/ugc/v1/uq/fr/SR_IMAGES/ugc_stylehint_uq_fr_photo_221214_1006921_r-1000-1333" alt="simple outfit" class="outfit-img"> </img>
-          <img src="https://api.fastretailing.com/ugc/v1/uq/fr/SR_IMAGES/ugc_stylehint_uq_fr_photo_221214_1006921_r-1000-1333" alt="simple outfit" class="outfit-img"> </img>
-        </a>
-        <a class="outfit-wrapper">Outfit 2
-          <img src="https://api.fastretailing.com/ugc/v1/uq/fr/SR_IMAGES/ugc_stylehint_uq_fr_photo_221214_1006921_r-1000-1333" alt="simple outfit" class="outfit-img"> </img>
-        </a>
-        <a class="outfit-wrapper">Outfit 3
-          <img src="https://api.fastretailing.com/ugc/v1/uq/fr/SR_IMAGES/ugc_stylehint_uq_fr_photo_221214_1006921_r-1000-1333" alt="simple outfit" class="outfit-img"> </img>
-        </a>
-        <a class="outfit-wrapper">Outfit 4
-          <img src="https://api.fastretailing.com/ugc/v1/uq/fr/SR_IMAGES/ugc_stylehint_uq_fr_photo_221214_1006921_r-1000-1333" alt="simple outfit" class="outfit-img"> </img>
-        </a>
-      </div>
+    <div class="upload-button-wrapper">
+      <a href="upload" class="upload-button">Upload</a>
     </div>
-  </body>
+  </div>
+
+  <div class="output-container">
+    <div class="output-flex">
+      <a class="outfit-wrapper">Outfit 1
+        <img src="https://api.fastretailing.com/ugc/v1/uq/fr/SR_IMAGES/ugc_stylehint_uq_fr_photo_221214_1006921_r-1000-1333"
+          alt="simple outfit" class="outfit-img">
+      </a>
+      <a class="outfit-wrapper">Outfit 2
+        <img src="https://api.fastretailing.com/ugc/v1/uq/fr/SR_IMAGES/ugc_stylehint_uq_fr_photo_221214_1006921_r-1000-1333"
+          alt="simple outfit" class="outfit-img">
+      </a>
+      <a class="outfit-wrapper">Outfit 3
+        <img src="https://api.fastretailing.com/ugc/v1/uq/fr/SR_IMAGES/ugc_stylehint_uq_fr_photo_221214_1006921_r-1000-1333"
+          alt="simple outfit" class="outfit-img">
+      </a>
+      <a class="outfit-wrapper">Outfit 4
+        <img src="https://api.fastretailing.com/ugc/v1/uq/fr/SR_IMAGES/ugc_stylehint_uq_fr_photo_221214_1006921_r-1000-1333"
+          alt="simple outfit" class="outfit-img">
+      </a>
+      <a class="outfit-wrapper">Outfit 5
+        <img src="https://api.fastretailing.com/ugc/v1/uq/fr/SR_IMAGES/ugc_stylehint_uq_fr_photo_221214_1006921_r-1000-1333"
+          alt="simple outfit" class="outfit-img">
+      </a>
+      <a class="outfit-wrapper">Outfit 6
+        <img src="https://api.fastretailing.com/ugc/v1/uq/fr/SR_IMAGES/ugc_stylehint_uq_fr_photo_221214_1006921_r-1000-1333"
+          alt="simple outfit" class="outfit-img">
+      </a>
+    </div>
+  </div>
+</body>
+
 </html>
