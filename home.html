@@ -4,6 +4,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="script.js"></script>
   </head>
+
   <body>
     <div class="input-sidebar">
       <div class="searchbar">
@@ -11,40 +12,28 @@
           <input type="text" placeholder="Search" name="search">
           <button type="submit"><i class="fa fa-search"></i></button>
         </form>
-
-        <ul id="myMenu">
-
-            <li><a href="#">Dress</a></li>
-            <div class="dress-flex">
-              <a hidden class="row">
-            </div>
-            <li><a href="#">Top</a></li>
-            <div class="top-flex">
-
-            </div>
-            <li><a href="#">Bottom</a></li>
-            <div class="bottom-flex">
-
-            </div>
-            <li><a href="#">Pullover</a></li>
-            <div class="pullover-flex">
-
-            </div>
-            <li><a href="#">Outerwear</a></li>
-            <div class="outerwear-flex">
-
-            </div>
-            <li><a href="#">Shoes</a></li>
-            <div class="shoes-flex">
-
-            </div>
-            <li><a href="#">Bag</a></li>
-            <div class="bag-flex">
-
-            </div>
-
-        </ul>
       </div>
+      <ul id="myMenu">
+        <li><a onclick="expandOptions()">Tops</a></li>
+          <div class="flex-hidden" id="tops-menu">
+            <a class="input-option">
+              <img src="https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/455359/sub/goods_455359_sub14.jpg?width=700" alt="generic blank t-shirt from uniqlo"></img>
+            </a>
+            <a class="outfit-wrapper">Top 2
+            </a>
+            <a class="outfit-wrapper">Top 3
+            </a>
+          </div>
+          <li><a href="#">Bottoms</a></li>
+          <div class="flex-hidden">
+          </div>
+          <li><a href="#">Outerwear</a></li>
+          <div class="flex-hidden">
+          </div>
+          <li><a href="#">Shoes</a></li>
+          <div class="flex-hidden">
+          </div>
+      </ul>
 
       <div class="upload-button-wrapper">
         <a href="something" class="upload-button"> Upload </a>
